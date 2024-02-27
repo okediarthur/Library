@@ -27,5 +27,7 @@ function Book(title, author, pages, read){
 }
 
 function addBookToLibrary(){
-
+    //Get book title
+    var title = document.getElementById('title').value;
+    
 }
