@@ -1,20 +1,5 @@
 
-const myLibrary = [{
-    title: "The Alchemist",
-    author: "Paulo Cohelo",
-    pages: 208
-},
-{
-    title: "Atomic Habits",
-    author: "James Clear",
-    pages: 320
-},
-{
-    title: "The Subtle Art of Not Giving a F*ck",
-    author: "Mark Manson",
-    pages: 224
-}
-];
+const myLibrary = [];
 
 function Book(title, author, pages, read){
     this.title = title;
@@ -51,7 +36,14 @@ function addBookToLibrary(){
 }
 //Function to update the displayed library
 function updateBookLibrary(){
-    var bookList = document.getElementById('myLibrary');
+    var bookList = document.getElementById('bookLibrary');
     //Clear the list
     bookList.innerHTML = '';
+
+    //Populate the list with book Instances
+    for(var i = 0; i < myLibrary.length; i++){
+        var listItem = document.createElement('li');
+        listItem.appendChild(document.createTextNode(myLibrary[i].info()));
+        bookList.appendChild(listItem);
+    }
 }
