@@ -73,14 +73,18 @@ function updateBookLibrary(){
 
         var readCell = document.createElement('td');
         readCell.textContent = book.read ? 'Read' : 'Not Read';
+        readCell.addEventListener('click', function(){
+            book.read = !book.read;
+            updateBookLibrary();
+        });
         row.appendChild(readCell);
 
         var removeCell = document.createElement('td');
         var removeButton = document.createElement('button');
         removeButton.textContent = 'Remove';
-        // removeButton.addEventListener('click', function() {
-        //     removeBook(i); //Pass the index of the book to remove
-        // });
+        removeButton.addEventListener('click', function() {
+            removeBook(i); //Pass the index of the book to remove
+        });
         (function (index){
             removeButton.addEventListener('click', function(){
                 removeBook(index);
