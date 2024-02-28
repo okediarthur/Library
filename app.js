@@ -11,6 +11,12 @@ function Book(title, author, pages, read){
     }
 }
 
+// function to open form
+function openForm(){
+    var bookForm = document.getElementById('bookForm');
+    bookForm.style.display = 'block';
+}
+
 function addBookToLibrary(){
     //Get values from input fields
     var title = document.getElementById('title').value;
@@ -69,6 +75,25 @@ function updateBookLibrary(){
         readCell.textContent = book.read ? 'Read' : 'Not Read';
         row.appendChild(readCell);
 
+        var removeCell = document.createElement('td');
+        var removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        // removeButton.addEventListener('click', function() {
+        //     removeBook(i); //Pass the index of the book to remove
+        // });
+        (function (index){
+            removeButton.addEventListener('click', function(){
+                removeBook(index);
+            });
+        })(i);
+
+        removeCell.appendChild(removeButton);
+        row.appendChild(removeCell);
+
+        row.addEventListener('click', function(){
+            openDialog(book);
+        });
+
         bookTable.appendChild(row);
     }
     // var bookList = document.getElementById('bookLibrary');
@@ -82,4 +107,31 @@ function updateBookLibrary(){
     //     bookList.appendChild(listItem);
     // }
 
+}
+
+//Function to open the dialog with the book details
+function openDialog(book){
+    var dialogContent = document.getElementById('dialogContent');
+    dialogContent.innerHTML = '';
+
+    //Add the book details to the dialog content
+    var detailsParagraph = document.createElement('p');
+    detailsParagraph.textContent = `Title: ${book.title}, Author: ${book.author}, Pages: ${book.pages},
+    Read: ${book.read ? 'Yes' : 'No'}`;
+    dialogContent.appendChild(detailsParagraph);
+
+    //  show the dialog
+    var bookDialog = document.getElementById('bookDialog');
+    bookDialog.showModal();
+}
+
+//function to close the dialog
+function closeDialog(){
+    var bookDialog = document.getElementById('bookDialog');
+    bookDialog.close();
+}
+
+function removeBook(index){
+    myLibrary.splice(index, 1);
+    updateBookLibrary();
 }
