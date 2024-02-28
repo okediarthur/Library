@@ -36,14 +36,50 @@ function addBookToLibrary(){
 }
 //Function to update the displayed library
 function updateBookLibrary(){
-    var bookList = document.getElementById('bookLibrary');
-    //Clear the list
-    bookList.innerHTML = '';
 
-    //Populate the list with book Instances
+    var bookTable = document.getElementById('bookLibrary');
+
+    //clear the table
+    bookTable.innerHTML = '';
+
+    //create the table header
+    var headerRow = document.createElement('tr');
+    headerRow.innerHTML = '<th>Title</th><th>Author</th><th>Pages</th><th>Read</th>';
+    bookTable.appendChild(headerRow);
+
+    //Populate the table with book instances
     for(var i = 0; i < myLibrary.length; i++){
-        var listItem = document.createElement('li');
-        listItem.appendChild(document.createTextNode(myLibrary[i].info()));
-        bookList.appendChild(listItem);
+        var book = myLibrary[i];
+
+        var row = document.createElement('tr');
+
+        var titleCell = document.createElement('td');
+        titleCell.textContent = book.title;
+        row.appendChild(titleCell);
+
+        var authorCell = document.createElement('td');
+        authorCell.textContent = book.author;
+        row.appendChild(authorCell);
+
+        var pagesCell = document.createElement('td');
+        pagesCell.textContent = book.pages;
+        row.appendChild(pagesCell);
+
+        var readCell = document.createElement('td');
+        readCell.textContent = book.read ? 'Read' : 'Not Read';
+        row.appendChild(readCell);
+
+        bookTable.appendChild(row);
     }
+    // var bookList = document.getElementById('bookLibrary');
+    //Clear the list
+    // bookList.innerHTML = '';
+
+    // //Populate the list with book Instances
+    // for(var i = 0; i < myLibrary.length; i++){
+    //     var listItem = document.createElement('li');
+    //     listItem.appendChild(document.createTextNode(myLibrary[i].info()));
+    //     bookList.appendChild(listItem);
+    // }
+
 }
